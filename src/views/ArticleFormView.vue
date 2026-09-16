@@ -64,20 +64,8 @@
             </h3>
 
             <div class="mb-2 flex flex-wrap gap-1.5">
-              <button
-                class="cursor-pointer inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium bg-muted text-muted-foreground"
-              >
-                #Test
+              <Tag v-for="(tag, index) in tags" :tag="tag" :key="tag" @click="tags = tags.filter((tag, i) => i !== index)" />
 
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                  <path
-                    d="M2 2l6 6M8 2L2 8"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  ></path>
-                </svg>
-              </button>
             </div>
 
             <div class="flex gap-2">
@@ -86,11 +74,13 @@
                   type="text"
                   class="flex-1 w-full px-4 py-2.5 rounded-xl text-sm outline-none bg-card border-[1.5px] border-border text-foreground"
                   placeholder="Add a tag and press Enter"
+                  v-model="inputTag"
                 />
               </label>
 
               <button
                 class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-secondary text-secondary-foreground cursor-pointer"
+                @click="addTag()"
               >
                 Add
               </button>
@@ -117,7 +107,8 @@ import { modalDisplayKey } from '@/keys.ts'
 import PreviousPageIcon from '@/components/icons/PreviousPageIcon.vue'
 import FormCard from '@/components/Card/FormCard.vue'
 import { getOgMetadata } from '@/services/ogService.ts'
-import type { Article, ogMetaData } from '@/types/article.types.ts'
+import type { ogMetaData } from '@/types/article.types.ts'
+import Tag from '@/components/Tag.vue'
 
 const route = useRoute()
 const toolbarToggle = inject(modalDisplayKey)
@@ -129,9 +120,22 @@ const categoryButtonData = ref({
   index: 0,
   category: ''
 })
+const tags = ref<string[]>([])
+const inputTag = ref<string>('')
 
 if (route.name === 'modal.create') {
   toolbarToggle.value = false
+}
+
+addEventListener("keydown", (event) => {
+  if (event.key === 'Enter' && inputTag.value !== '') {
+   addTag()
+  }
+})
+
+function addTag() {
+  tags.value.push(inputTag.value.toLowerCase())
+  inputTag.value = ''
 }
 
 watch(url, async () => {
@@ -162,6 +166,5 @@ const isUrlValid = computed(() => {
 function getCategoryData(index: number) {
   categoryButtonData.value.index = index
   categoryButtonData.value.category = categoryButtonArray[categoryButtonData.value.index]!
-  console.log(categoryButtonData.value)
 }
 </script>
