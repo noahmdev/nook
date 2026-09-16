@@ -11,8 +11,6 @@
         Back to library
       </RouterLink>
 
-      {{ article }}
-
       <h1 class="text-3xl font-medium mb-1 font-display text-foreground">Save an article</h1>
       <p class="text-sm mb-8 text-muted-foreground">
         Paste a URL and we will fetch the details automatically.
@@ -49,9 +47,11 @@
 
             <div class="flex items-center flex-wrap gap-2">
               <button
-                v-for="button in categoryButtonArray"
+                v-for="(button, index) in categoryButtonArray"
                 :key="button"
-                class="cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium bg-muted text-muted-foreground first:bg-foreground first:text-background"
+                class="cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium"
+                :class="index === categoryButtonData.index ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground'"
+                @click="getCategoryData(index)"
               >
                 {{ button }}
               </button>
@@ -121,10 +121,14 @@ import type { Article, ogMetaData } from '@/types/article.types.ts'
 
 const route = useRoute()
 const toolbarToggle = inject(modalDisplayKey)
-const url = ref('')
-const urlToggle = ref(false)
+const url = ref<string>('')
+const urlToggle = ref<boolean>(false)
 const fetchArticle = ref<ogMetaData>()
 let time: ReturnType<typeof setTimeout> | undefined
+const categoryButtonData = ref({
+  index: 0,
+  category: ''
+})
 
 if (route.name === 'modal.create') {
   toolbarToggle.value = false
@@ -154,4 +158,10 @@ const isUrlValid = computed(() => {
     return false
   }
 })
+
+function getCategoryData(index: number) {
+  categoryButtonData.value.index = index
+  categoryButtonData.value.category = categoryButtonArray[categoryButtonData.value.index]!
+  console.log(categoryButtonData.value)
+}
 </script>

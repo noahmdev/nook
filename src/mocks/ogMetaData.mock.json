@@ -1,5 +1,5 @@
 {
-  "https://example.com/article-1": {
+    "https://example.com/article-1": {
     "url": "https://example.com/article-1",
     "title": "Comment fonctionne le rendu SSR en Vue.js",
     "description": "Un guide complet sur le rendu côté serveur avec Nuxt et les enjeux de performance qui l'accompagnent.",
