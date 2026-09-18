@@ -10,3 +10,7 @@ export function initLocalStorage(): Article[] {
 
   return JSON.parse(articles)
 }
+
+export function saveLocalStorage(articlesArray: Article[]): void {
+  localStorage.setItem('articles', JSON.stringify(articlesArray))
+}

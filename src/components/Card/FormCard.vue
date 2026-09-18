@@ -18,8 +18,6 @@
         <p class="text-xs leading-relaxed line-clamp-2 text-muted-foreground">
           {{ props.description }}
         </p>
-
-        <p class="text-xs mt-2 text-muted-foreground">n min read</p>
       </div>
     </template>
   </Card>

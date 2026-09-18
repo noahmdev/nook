@@ -16,7 +16,7 @@
         Paste a URL and we will fetch the details automatically.
       </p>
 
-      <form @submit.prevent method="POST">
+      <form @submit.prevent="handleSubmit" method="POST">
         <label class="mb-6 inline-block w-full">
           <span
             class="inline-block text-xs font-semibold mb-1.5 uppercase tracking-wide text-muted-foreground"
@@ -47,10 +47,15 @@
 
             <div class="flex items-center flex-wrap gap-2">
               <button
+                type="button"
                 v-for="(button, index) in categoryButtonArray"
                 :key="button"
                 class="cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium"
-                :class="index === categoryButtonData.index ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground'"
+                :class="
+                  index === categoryButtonData.index
+                    ? 'bg-foreground text-background'
+                    : 'bg-muted text-muted-foreground'
+                "
                 @click="getCategoryData(index)"
               >
                 {{ button }}
@@ -64,8 +69,12 @@
             </h3>
 
             <div class="mb-2 flex flex-wrap gap-1.5">
-              <Tag v-for="(tag, index) in tags" :tag="tag" :key="tag" @click="tags = tags.filter((tag, i) => i !== index)" />
-
+              <Tag
+                v-for="(tag, index) in tags"
+                :tag="tag"
+                :key="tag"
+                @click="tags = tags.filter((tag, i) => i !== index)"
+              />
             </div>
 
             <div class="flex gap-2">
@@ -75,10 +84,12 @@
                   class="flex-1 w-full px-4 py-2.5 rounded-xl text-sm outline-none bg-card border-[1.5px] border-border text-foreground"
                   placeholder="Add a tag and press Enter"
                   v-model="inputTag"
+                  @keydown.enter.prevent="addTag()"
                 />
               </label>
 
               <button
+                type="button"
                 class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-secondary text-secondary-foreground cursor-pointer"
                 @click="addTag()"
               >
@@ -102,13 +113,14 @@
 
 <script setup lang="ts">
 import { computed, inject, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { modalDisplayKey } from '@/keys.ts'
 import PreviousPageIcon from '@/components/icons/PreviousPageIcon.vue'
 import FormCard from '@/components/Card/FormCard.vue'
 import { getOgMetadata } from '@/services/ogService.ts'
-import type { ogMetaData } from '@/types/article.types.ts'
+import type { Article, ogMetaData } from '@/types/article.types.ts'
 import Tag from '@/components/Tag.vue'
+import { useStorageStore } from '@/stores/useStorageStore.ts'
 
 const route = useRoute()
 const toolbarToggle = inject(modalDisplayKey)
@@ -118,24 +130,43 @@ const fetchArticle = ref<ogMetaData>()
 let time: ReturnType<typeof setTimeout> | undefined
 const categoryButtonData = ref({
   index: 0,
-  category: ''
+  category: '',
 })
 const tags = ref<string[]>([])
 const inputTag = ref<string>('')
 
-if (route.name === 'modal.create') {
-  toolbarToggle.value = false
-}
+const store = useStorageStore()
+const router = useRouter()
 
-addEventListener("keydown", (event) => {
-  if (event.key === 'Enter' && inputTag.value !== '') {
-   addTag()
-  }
-})
+if (route.name === 'modal.create') {
+  if (toolbarToggle) toolbarToggle.value = false
+}
 
 function addTag() {
   tags.value.push(inputTag.value.toLowerCase())
   inputTag.value = ''
+}
+
+function handleSubmit(): void {
+  if (!fetchArticle.value) return
+
+  const date = new Date()
+  const currentDate = `${date.toLocaleString('en-US', {month: 'short', day: 'numeric'})}, ${date.getFullYear()}`
+
+  const article: Article = {
+    id: crypto.randomUUID(),
+    url: fetchArticle.value.url,
+    title: fetchArticle.value.title,
+    description: fetchArticle.value.description,
+    image: fetchArticle.value.image,
+    tags: tags.value,
+    category: categoryButtonData.value.category,
+    isRead: false,
+    dateAdded: currentDate,
+  }
+  store.saveItem(article)
+
+  router.push({name: 'articles.show'})
 }
 
 watch(url, async () => {

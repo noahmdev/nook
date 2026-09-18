@@ -3,8 +3,8 @@ export interface Article {
   url: string
   title: string
   description: string
-  image: string
-  tags: string[]
+  image?: string
+  tags?: string[]
   category: string
   isRead: boolean
   dateAdded: string

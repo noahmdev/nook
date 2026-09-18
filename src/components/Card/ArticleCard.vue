@@ -1,11 +1,7 @@
 <template>
   <Card :clickable="true">
     <template #card__media>
-      <img
-        src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&h=380&fit=crop&auto=format"
-        alt="Image of the article"
-        class="size-full object-cover"
-      />
+      <img :src="props?.image" alt="Image of the article" class="size-full object-cover" />
 
       <div class="absolute size-2.5 top-3 left-3 rounded-full bg-primary"></div>
 
@@ -21,31 +17,31 @@
       <div class="flex items-center justify-between">
         <span
           class="inline-flex items-center rounded-full font-medium px-2 py-0.5 text-xs bg-tag-design-bg text-tag-design-fg"
-          >Design</span
+          >{{ props.category }}</span
         >
-        <p class="text-xs text-muted-foreground">n min</p>
       </div>
 
       <h3
         class="text-base font-semibold leading-snug line-clamp-2 font-display text-card-foreground"
       >
-        Title
+        {{ props.title }}
       </h3>
 
       <p class="text-xs leading-relaxed line-clamp-2 text-muted-foreground">
-        How type designers are reinventing the typographic palette with axes that bend weight,
-        width, and optical size in real time — and why it matters for the open web.
+        {{ props.description }}
       </p>
 
-      <div class="flex flex-wrap gap-1">
+      <div class="flex overflow-x-scroll hide-scrollbar gap-1">
         <span
-          class="z-3 inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-muted text-muted-foreground cursor-pointer"
-          >#web</span
+          v-for="tag in props.tags"
+          :key="tag"
+          class="z-3 inline-block items-center rounded-full px-2 py-0.5 text-xs font-medium bg-muted text-muted-foreground cursor-pointer"
+          >#{{ tag }}</span
         >
       </div>
 
       <div class="flex items-center justify-between pt-1">
-        <time class="text-xs text-muted-foreground"> Sep 10, 2026</time>
+        <time class="text-xs text-muted-foreground"> {{ props.date }} </time>
 
         <div class="flex items-center gap-1.5">
           <span class="text-xs text-muted-foreground">Unread</span>
@@ -64,4 +60,17 @@
 <script setup lang="ts">
 import Card from '@/components/Card/Card.vue'
 import DeleteIcon from '@/components/icons/DeleteIcon.vue'
+
+const props = withDefaults(defineProps<{
+  image?: string
+  category: string
+  title: string
+  description: string
+  tags?: string[]
+  isRead: boolean
+  date: string
+}>(), {
+  image: '',
+  tags: () => [],
+})
 </script>

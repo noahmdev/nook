@@ -135,3 +135,9 @@
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
