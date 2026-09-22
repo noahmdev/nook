@@ -14,9 +14,16 @@ export const useStorageStore = defineStore('storage', {
       saveLocalStorage(this.articles)
     },
     toggleRead(id: string): void {
-      const article = this.articles.find((u) => u.id === id)
+      const article = this.articles.find((a) => a.id === id)
       if (article) {
         article.isRead = !article.isRead
+        saveLocalStorage(this.articles)
+      }
+    },
+    deleteArticle(id: string): void {
+      const index = this.articles.findIndex((a) => a.id === id)
+      if (index) {
+        this.articles.splice(index, 1)
         saveLocalStorage(this.articles)
       }
     }

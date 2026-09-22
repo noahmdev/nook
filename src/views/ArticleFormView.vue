@@ -113,7 +113,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import {  useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import PreviousPageIcon from '@/components/icons/PreviousPageIcon.vue'
 import FormCard from '@/components/Card/FormCard.vue'
 import { getOgMetadata } from '@/services/ogService.ts'
@@ -137,7 +137,6 @@ const store = useStorageStore()
 const router = useRouter()
 const toolbarToggle = useToolbarToggle()
 
-
 function addTag() {
   tags.value.push(inputTag.value.toLowerCase())
   inputTag.value = ''
@@ -147,7 +146,7 @@ function handleSubmit(): void {
   if (!fetchArticle.value) return
 
   const date = new Date()
-  const currentDate = `${date.toLocaleString('en-US', {month: 'short', day: 'numeric'})}, ${date.getFullYear()}`
+  const currentDate = `${date.toLocaleString('en-US', { month: 'short', day: 'numeric' })}, ${date.getFullYear()}`
 
   const article: Article = {
     id: crypto.randomUUID(),
@@ -163,7 +162,7 @@ function handleSubmit(): void {
   store.saveItem(article)
 
   toolbarToggle.showToolbar = true
-  router.push({name: 'articles.show'})
+  router.push({ name: 'articles.show' })
 }
 
 watch(url, async () => {

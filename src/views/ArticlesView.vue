@@ -18,6 +18,7 @@
         :isRead="article.isRead"
         :date="article.dateAdded"
         @toggle-read="toggleArticleRead"
+        @delete-card="deleteArticleCard"
       />
     </div>
   </div>
@@ -31,5 +32,9 @@ const store = useStorageStore()
 
 function toggleArticleRead(id: string) {
   store.toggleRead(id)
+}
+
+function deleteArticleCard(id: string) {
+  store.deleteArticle(id)
 }
 </script>

@@ -9,6 +9,7 @@
       <button
         class="absolute group-hover:opacity-100 hover:scale-115 transition-all duration-150 cursor-pointer bottom-3 z-3 right-3 size-7 rounded-full flex items-center justify-center text-white bg-black/55 opacity-0"
         title="Delete article"
+        @click="handleDeleteCard"
       >
         <DeleteIcon />
       </button>
@@ -68,6 +69,7 @@ import DeleteIcon from '@/components/icons/DeleteIcon.vue'
 
 const emit = defineEmits<{
   toggleRead: [id: string]
+  deleteCard: [id: string]
 }>()
 
 const props = withDefaults(defineProps<{
@@ -86,5 +88,9 @@ const props = withDefaults(defineProps<{
 
 function handleRead() {
   emit('toggleRead', props.id)
+}
+
+function handleDeleteCard() {
+  emit('deleteCard', props.id)
 }
 </script>
