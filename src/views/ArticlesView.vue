@@ -9,6 +9,7 @@
       <ArticleCard
         v-for="article in store.articles"
         :key="article.id"
+        :id="article.id"
         :title="article.title"
         :description="article.description"
         :image="article.image"
@@ -16,6 +17,7 @@
         :tags="article.tags"
         :isRead="article.isRead"
         :date="article.dateAdded"
+        @toggle-read="toggleArticleRead"
       />
     </div>
   </div>
@@ -26,4 +28,8 @@ import ArticleCard from '@/components/Card/ArticleCard.vue'
 import { useStorageStore } from '@/stores/useStorageStore.ts'
 
 const store = useStorageStore()
+
+function toggleArticleRead(id: string) {
+  store.toggleRead(id)
+}
 </script>

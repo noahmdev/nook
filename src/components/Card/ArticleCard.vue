@@ -1,10 +1,10 @@
 <template>
-  <Card :clickable="true">
+  <Card :clickable="true" :id="props.id">
     <template #card__media>
 
       <img :src="props?.image" alt="Image of the article" class="size-full object-cover" />
 
-      <div class="absolute size-2.5 top-3 left-3 rounded-full bg-primary"></div>
+      <div v-if="!props.isRead" class="absolute size-2.5 top-3 left-3 rounded-full bg-primary"></div>
 
       <button
         class="absolute group-hover:opacity-100 hover:scale-115 transition-all duration-150 cursor-pointer bottom-3 z-3 right-3 size-7 rounded-full flex items-center justify-center text-white bg-black/55 opacity-0"
@@ -49,11 +49,11 @@
           <button
             class="inline-flex h-6 w-11 relative items-center rounded-full bg-muted z-3 cursor-pointer transition-all duration-100"
             title="Mark as read"
-            @click="readState = !readState"
-            :class="readState ? 'bg-primary' : ''"
+            @click="handleRead"
+            :class="props.isRead ? 'bg-primary' : ''"
           >
             <span class="inline-block size-4 rounded-full bg-white shadow-sm translate-x-1 transition-all duration-200"
-                  :class="readState ? 'translate-x-6' : ''"
+                  :class="props.isRead ? 'translate-x-6' : ''"
             ></span>
           </button>
         </div>
@@ -65,11 +65,13 @@
 <script setup lang="ts">
 import Card from '@/components/Card/Card.vue'
 import DeleteIcon from '@/components/icons/DeleteIcon.vue'
-import { ref } from 'vue'
 
-const readState = ref(false)
+const emit = defineEmits<{
+  toggleRead: [id: string]
+}>()
 
 const props = withDefaults(defineProps<{
+  id: string
   image?: string
   category: string
   title: string
@@ -81,4 +83,8 @@ const props = withDefaults(defineProps<{
   image: '',
   tags: () => [],
 })
+
+function handleRead() {
+  emit('toggleRead', props.id)
+}
 </script>
