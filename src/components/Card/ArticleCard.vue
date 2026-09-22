@@ -1,12 +1,13 @@
 <template>
   <Card :clickable="true">
     <template #card__media>
+
       <img :src="props?.image" alt="Image of the article" class="size-full object-cover" />
 
       <div class="absolute size-2.5 top-3 left-3 rounded-full bg-primary"></div>
 
       <button
-        class="absolute bottom-3 z-3 right-3 size-7 rounded-full flex items-center justify-center text-white bg-black/55 opacity-0"
+        class="absolute group-hover:opacity-100 hover:scale-115 transition-all duration-150 cursor-pointer bottom-3 z-3 right-3 size-7 rounded-full flex items-center justify-center text-white bg-black/55 opacity-0"
         title="Delete article"
       >
         <DeleteIcon />

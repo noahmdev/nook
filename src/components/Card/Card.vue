@@ -1,6 +1,6 @@
 <template>
   <article
-    class="relative rounded-[14px] overflow-hidden flex flex-col bg-card border border-border shadow-sm"
+    class="group relative rounded-[14px] overflow-hidden flex flex-col bg-card border border-border shadow-sm"
   >
     <RouterLink to="/test" class="absolute inset-0 z-1" v-if="props.clickable" />
     <div class="relative overflow-hidden h-45 bg-muted">
