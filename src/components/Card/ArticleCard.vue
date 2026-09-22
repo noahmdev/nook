@@ -47,10 +47,14 @@
         <div class="flex items-center gap-1.5">
           <span class="text-xs text-muted-foreground">Unread</span>
           <button
-            class="inline-flex h-6 w-11 relative items-center rounded-full bg-muted z-3"
+            class="inline-flex h-6 w-11 relative items-center rounded-full bg-muted z-3 cursor-pointer transition-all duration-100"
             title="Mark as read"
+            @click="readState = !readState"
+            :class="readState ? 'bg-primary' : ''"
           >
-            <span class="inline-block size-4 rounded-full bg-white shadow-sm translate-x-1"></span>
+            <span class="inline-block size-4 rounded-full bg-white shadow-sm translate-x-1 transition-all duration-200"
+                  :class="readState ? 'translate-x-6' : ''"
+            ></span>
           </button>
         </div>
       </div>
@@ -61,6 +65,9 @@
 <script setup lang="ts">
 import Card from '@/components/Card/Card.vue'
 import DeleteIcon from '@/components/icons/DeleteIcon.vue'
+import { ref } from 'vue'
+
+const readState = ref(false)
 
 const props = withDefaults(defineProps<{
   image?: string
