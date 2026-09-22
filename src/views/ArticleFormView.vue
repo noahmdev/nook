@@ -128,7 +128,7 @@ const fetchArticle = ref<ogMetaData>()
 let time: ReturnType<typeof setTimeout> | undefined
 const categoryButtonData = ref({
   index: 0,
-  category: '',
+  category: 'Technology',
 })
 const tags = ref<string[]>([])
 const inputTag = ref<string>('')
