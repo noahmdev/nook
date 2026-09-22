@@ -4,7 +4,7 @@
       <RouterLink
         :to="{ name: 'articles.show' }"
         class="inline-flex items-center gap-1.5 text-sm font-medium mb-8 text-muted-foreground"
-        @click="toolbarToggle = true"
+        @click="toolbarToggle.showToolbar = true"
       >
         <PreviousPageIcon />
 
@@ -112,18 +112,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { modalDisplayKey } from '@/keys.ts'
+import { computed, ref, watch } from 'vue'
+import {  useRouter } from 'vue-router'
 import PreviousPageIcon from '@/components/icons/PreviousPageIcon.vue'
 import FormCard from '@/components/Card/FormCard.vue'
 import { getOgMetadata } from '@/services/ogService.ts'
 import type { Article, ogMetaData } from '@/types/article.types.ts'
 import Tag from '@/components/Tag.vue'
 import { useStorageStore } from '@/stores/useStorageStore.ts'
+import { useToolbarToggle } from '@/stores/useToolbarToggle.ts'
 
-const route = useRoute()
-const toolbarToggle = inject(modalDisplayKey)
 const url = ref<string>('')
 const urlToggle = ref<boolean>(false)
 const fetchArticle = ref<ogMetaData>()
@@ -137,10 +135,8 @@ const inputTag = ref<string>('')
 
 const store = useStorageStore()
 const router = useRouter()
+const toolbarToggle = useToolbarToggle()
 
-if (route.name === 'modal.create') {
-  if (toolbarToggle) toolbarToggle.value = false
-}
 
 function addTag() {
   tags.value.push(inputTag.value.toLowerCase())
@@ -166,6 +162,7 @@ function handleSubmit(): void {
   }
   store.saveItem(article)
 
+  toolbarToggle.showToolbar = true
   router.push({name: 'articles.show'})
 }
 

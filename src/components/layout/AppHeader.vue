@@ -3,7 +3,7 @@
     <RouterLink
       :to="{ name: 'articles.show' }"
       class="flex items-center gap-2"
-      @click="toolbarToggle = true"
+      @click="toolbarToggle.showToolbar = true"
     >
       <div class="bg-primary size-7 rounded-lg flex items-center justify-center">
         <LogoApp />
@@ -33,12 +33,11 @@
 <script setup lang="ts">
 import LogoApp from '@/components/images/LogoApp.vue'
 import DarkModeIcon from '@/components/icons/DarkModeIcon.vue'
-import { inject } from 'vue'
-import { modalDisplayKey } from '@/keys.ts'
 import { useStorageStore } from '@/stores/useStorageStore.ts'
+import { useToolbarToggle } from '@/stores/useToolbarToggle.ts'
 
-const toolbarToggle = inject(modalDisplayKey)
 const store = useStorageStore()
+const toolbarToggle = useToolbarToggle()
 
 const unread = store.articles.filter((a) => !a.isRead)
 </script>

@@ -12,6 +12,7 @@
       <RouterLink
         :to="{ name: 'modal.create' }"
         class="shrink-0 flex items-center mx-auto gap-1.5 rounded-full bg-primary text-primary-foreground px-4 py-2.5 text-sm font-semibold cursor-pointer"
+        @click="toolbarToggle.showToolbar = false"
       >
         <span class="text-base leading-none">+</span>
         <span class="hidden sm:inline">Save</span>
@@ -42,6 +43,9 @@
 
 <script setup lang="ts">
 import SearchIcon from '@/components/icons/SearchIcon.vue'
+import { useToolbarToggle } from '@/stores/useToolbarToggle.ts'
+
+const toolbarToggle = useToolbarToggle()
 
 const tags: string[] = ['All', 'Technology', 'Design', 'Science', 'Culture', 'Health', 'Business']
 

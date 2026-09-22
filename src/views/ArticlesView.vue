@@ -23,16 +23,7 @@
 
 <script setup lang="ts">
 import ArticleCard from '@/components/Card/ArticleCard.vue'
-import { modalDisplayKey } from '@/keys.ts'
-import { inject } from 'vue'
-import { useRoute } from 'vue-router'
 import { useStorageStore } from '@/stores/useStorageStore.ts'
 
 const store = useStorageStore()
-const toolbarToggle = inject(modalDisplayKey)
-const route = useRoute()
-
-if (route.name === 'article.show') {
-  if (toolbarToggle) toolbarToggle.value = true
-}
 </script>
