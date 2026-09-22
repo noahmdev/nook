@@ -35,9 +35,12 @@ import LogoApp from '@/components/images/LogoApp.vue'
 import DarkModeIcon from '@/components/icons/DarkModeIcon.vue'
 import { useStorageStore } from '@/stores/useStorageStore.ts'
 import { useToolbarToggle } from '@/stores/useToolbarToggle.ts'
+import { computed } from 'vue'
 
 const store = useStorageStore()
 const toolbarToggle = useToolbarToggle()
 
-const unread = store.articles.filter((a) => !a.isRead)
+const unread = computed(() => {
+  return store.articles.filter((a) => !a.isRead)
+})
 </script>
