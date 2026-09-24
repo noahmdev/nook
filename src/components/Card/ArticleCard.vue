@@ -1,10 +1,12 @@
 <template>
-  <Card :clickable="true" :id="props.id">
+  <Card :article="props.id" :clickable="true" :id="props.id">
     <template #card__media>
-
       <img :src="props?.image" alt="Image of the article" class="size-full object-cover" />
 
-      <div v-if="!props.isRead" class="absolute size-2.5 top-3 left-3 rounded-full bg-primary"></div>
+      <div
+        v-if="!props.isRead"
+        class="absolute size-2.5 top-3 left-3 rounded-full bg-primary"
+      ></div>
 
       <button
         class="absolute group-hover:opacity-100 hover:scale-115 transition-all duration-150 cursor-pointer bottom-3 z-3 right-3 size-7 rounded-full flex items-center justify-center text-white bg-black/55 opacity-0"
@@ -53,8 +55,9 @@
             @click="handleRead"
             :class="props.isRead ? 'bg-primary' : ''"
           >
-            <span class="inline-block size-4 rounded-full bg-white shadow-sm translate-x-1 transition-all duration-200"
-                  :class="props.isRead ? 'translate-x-6' : ''"
+            <span
+              class="inline-block size-4 rounded-full bg-white shadow-sm translate-x-1 transition-all duration-200"
+              :class="props.isRead ? 'translate-x-6' : ''"
             ></span>
           </button>
         </div>
@@ -72,19 +75,22 @@ const emit = defineEmits<{
   deleteCard: [id: string]
 }>()
 
-const props = withDefaults(defineProps<{
-  id: string
-  image?: string
-  category: string
-  title: string
-  description: string
-  tags?: string[]
-  isRead: boolean
-  date: string
-}>(), {
-  image: '',
-  tags: () => [],
-})
+const props = withDefaults(
+  defineProps<{
+    id: string
+    image?: string
+    category: string
+    title: string
+    description: string
+    tags?: string[]
+    isRead: boolean
+    date: string
+  }>(),
+  {
+    image: '',
+    tags: () => [],
+  },
+)
 
 function handleRead() {
   emit('toggleRead', props.id)

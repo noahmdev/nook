@@ -1,7 +1,16 @@
 <template>
-  <AppHeader :class="{ 'border-b border-b-border': route.name === 'modal.create' }" />
+  <AppHeader
+    :class="{
+      'border-b border-b-border': route.name === 'modal.create' || route.name === 'article.show',
+    }"
+  />
   <ArticleToolbar v-if="toolbarToggle.showToolbar" />
-  <main :class="{ 'px-4 py-8 flex-1 md:px-8': route.name === 'articles.show' }">
+  <main
+    class="min-h-full"
+    :class="{
+      'px-4 py-8 md:px-8': route.name === 'articles.index' || route.name === 'article.show',
+    }"
+  >
     <RouterView />
   </main>
 </template>
@@ -16,5 +25,4 @@ const route = useRoute()
 
 const toolbarToggle = useToolbarToggle()
 toolbarToggle.showToolbar = true
-
 </script>

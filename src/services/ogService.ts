@@ -11,7 +11,7 @@ export async function getOgMetadata(url: string): Promise<ogMetaData | undefined
   const api: string = import.meta.env.VITE_OPENGRAPH_API_KEY
 
   const response = await fetch(
-    `https://opengraph.io/api/3.0/site/${encodeURIComponent(url)}?app_id=${api}`
+    `https://opengraph.io/api/3.0/site/${encodeURIComponent(url)}?app_id=${api}`,
   )
 
   if (!response.ok) {

@@ -2,7 +2,11 @@
   <article
     class="group relative rounded-[14px] overflow-hidden flex flex-col bg-card border border-border shadow-sm"
   >
-    <RouterLink to="/test" class="absolute inset-0 z-1" v-if="props.clickable" />
+    <RouterLink
+      :to="{ name: 'article.show', params: { id: props.id } }"
+      class="absolute inset-0 z-1"
+      v-if="props.clickable"
+    />
     <div class="relative overflow-hidden h-45 bg-muted">
       <slot name="card__media"></slot>
     </div>
@@ -16,5 +20,6 @@
 <script setup lang="ts">
 const props = defineProps<{
   clickable?: boolean
+  id?: string
 }>()
 </script>

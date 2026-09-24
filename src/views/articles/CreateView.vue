@@ -2,7 +2,7 @@
   <div class="min-h-full px-4 py-8">
     <section class="max-w-xl mx-auto">
       <RouterLink
-        :to="{ name: 'articles.show' }"
+        :to="{ name: 'articles.index' }"
         class="inline-flex items-center gap-1.5 text-sm font-medium mb-8 text-muted-foreground"
         @click="toolbarToggle.showToolbar = true"
       >
@@ -32,7 +32,7 @@
           />
         </label>
 
-        <article v-if="urlToggle">
+        <article v-if="isUrlValid">
           <FormCard
             v-if="fetchArticle"
             :title="fetchArticle.title"
@@ -72,6 +72,7 @@
               <Tag
                 v-for="(tag, index) in tags"
                 :tag="tag"
+                :form="true"
                 :key="tag"
                 @click="tags = tags.filter((tag, i) => i !== index)"
               />
@@ -102,7 +103,7 @@
         <button
           type="submit"
           class="w-full py-3.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 bg-primary cursor-pointer text-primary-foreground disabled:opacity-40 disabled: disabled:pointer-events-none"
-          :disabled="!urlToggle"
+          :disabled="!isUrlValid"
         >
           Paste a URL above to continue
         </button>
@@ -123,7 +124,6 @@ import { useStorageStore } from '@/stores/useStorageStore.ts'
 import { useToolbarToggle } from '@/stores/useToolbarToggle.ts'
 
 const url = ref<string>('')
-const urlToggle = ref<boolean>(false)
 const fetchArticle = ref<ogMetaData>()
 let time: ReturnType<typeof setTimeout> | undefined
 const categoryButtonData = ref({
@@ -136,6 +136,7 @@ const inputTag = ref<string>('')
 const store = useStorageStore()
 const router = useRouter()
 const toolbarToggle = useToolbarToggle()
+toolbarToggle.showToolbar = false
 
 function addTag() {
   tags.value.push(inputTag.value.toLowerCase())
@@ -162,7 +163,7 @@ function handleSubmit(): void {
   store.saveItem(article)
 
   toolbarToggle.showToolbar = true
-  router.push({ name: 'articles.show' })
+  router.push({ name: 'articles.index' })
 }
 
 watch(url, async () => {
@@ -179,13 +180,8 @@ const categoryButtonArray = ['Technology', 'Design', 'Science', 'Culture', 'Heal
 const isUrlValid = computed(() => {
   try {
     const u = new URL(url.value)
-    const conditions = u.protocol === 'https:' || u.protocol === 'http:' || u.hostname !== ''
-    if (conditions) {
-      urlToggle.value = true
-      return true
-    }
+    return (u.protocol === 'https:' || u.protocol === 'http:') && u.hostname !== ''
   } catch {
-    urlToggle.value = false
     return false
   }
 })

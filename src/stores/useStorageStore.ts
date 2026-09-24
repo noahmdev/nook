@@ -26,6 +26,6 @@ export const useStorageStore = defineStore('storage', {
         this.articles.splice(index, 1)
         saveLocalStorage(this.articles)
       }
-    }
+    },
   },
 })

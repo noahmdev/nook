@@ -1,7 +1,7 @@
 <template>
   <header class="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-background">
     <RouterLink
-      :to="{ name: 'articles.show' }"
+      :to="{ name: 'articles.index' }"
       class="flex items-center gap-2"
       @click="toolbarToggle.showToolbar = true"
     >
