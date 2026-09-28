@@ -22,7 +22,7 @@ export const useStorageStore = defineStore('storage', {
     },
     deleteArticle(id: string): void {
       const index = this.articles.findIndex((a) => a.id === id)
-      if (index) {
+      if (index !== -1) {
         this.articles.splice(index, 1)
         saveLocalStorage(this.articles)
       }
