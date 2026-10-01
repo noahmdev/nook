@@ -6,6 +6,9 @@ export const useStorageStore = defineStore('storage', {
   state: () => {
     return {
       articles: initLocalStorage(),
+      searchQuery: '',
+      categoryFilter: 'all',
+      readStatusFilter: 'all',
     }
   },
   actions: {

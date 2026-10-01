@@ -128,7 +128,7 @@ const fetchArticle = ref<ogMetaData>()
 let time: ReturnType<typeof setTimeout> | undefined
 const categoryButtonData = ref({
   index: 0,
-  category: 'Technology',
+  category: 'technology',
 })
 const tags = ref<string[]>([])
 const inputTag = ref<string>('')
@@ -188,6 +188,7 @@ const isUrlValid = computed(() => {
 
 function getCategoryData(index: number) {
   categoryButtonData.value.index = index
-  categoryButtonData.value.category = categoryButtonArray[categoryButtonData.value.index]!
+  categoryButtonData.value.category =
+    categoryButtonArray[categoryButtonData.value.index]!.toLowerCase()
 }
 </script>

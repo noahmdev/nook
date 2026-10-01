@@ -7,7 +7,7 @@
 
     <div id="display-cards" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       <ArticleCard
-        v-for="article in store.articles"
+        v-for="article in filteredArticles"
         :key="article.id"
         :id="article.id"
         :title="article.title"
@@ -27,8 +27,37 @@
 <script setup lang="ts">
 import ArticleCard from '@/components/Card/ArticleCard.vue'
 import { useStorageStore } from '@/stores/useStorageStore.ts'
+import { computed } from 'vue'
 
 const store = useStorageStore()
+
+const filteredArticles = computed(() => {
+  let filteredArray = store.articles
+
+  filteredArray = filteredArray.filter((a) => {
+    let readStatus = null
+
+    if (store.readStatusFilter === 'read') readStatus = true
+    if (store.readStatusFilter === 'unread') readStatus = false
+
+    return (
+      (store.categoryFilter === 'all' || a.category === store.categoryFilter) &&
+      (store.readStatusFilter === 'all' || a.isRead === readStatus)
+    )
+  })
+
+  if (!store.searchQuery) return filteredArray
+
+  return filteredArray.filter(
+    (article) =>
+      article.title.toLowerCase().includes(store.searchQuery.trim().toLowerCase()) ||
+      article.description.toLowerCase().includes(store.searchQuery.trim().toLocaleLowerCase()) ||
+      article.tags?.some((tag) =>
+        tag.toLowerCase().includes(store.searchQuery.trim().toLowerCase()),
+      ) ||
+      article.category.toLowerCase().includes(store.searchQuery.trim().toLowerCase()),
+  )
+})
 
 function toggleArticleRead(id: string) {
   store.toggleRead(id)

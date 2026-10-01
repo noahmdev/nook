@@ -7,6 +7,7 @@
           type="search"
           placeholder="Search articles,tags..."
           class="w-full pl-9 pr-4 py-2.5 rounded-full text-sm outline-none bg-secondary text-foreground border-[1.5px] border-transparent"
+          v-model="store.searchQuery"
         />
       </div>
       <RouterLink
@@ -21,21 +22,33 @@
 
     <div class="hide-scrollbar max-w-5xl mx-auto flex items-center mt-3 overflow-x-auto pb-1 gap-2">
       <button
-        v-for="tag in tags"
-        :key="tag"
-        class="shrink-0 px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground first:bg-foreground first:text-background cursor-pointer"
+        v-for="(category, index) in categories"
+        :key="category"
+        class="shrink-0 px-3 py-1 rounded-full text-xs font-medium cursor-pointer"
+        :class="
+          index === categoryButtonIndex
+            ? 'text-background bg-foreground'
+            : 'text-muted-foreground bg-muted'
+        "
+        @click="getCategoryFilter(index)"
       >
-        {{ tag }}
+        {{ category }}
       </button>
     </div>
 
     <div class="max-w-5xl mx-auto mt-2 flex items-center gap-1 justify-end">
       <button
-        v-for="state in states"
-        :key="state"
-        class="px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground first:bg-primary first:text-primary-foreground"
+        v-for="(readStatus, index) in readStatusButton"
+        :key="readStatus"
+        class="px-3 py-1 rounded-full text-xs font-medium cursor-pointer"
+        :class="
+          index === readButtonIndex
+            ? 'bg-primary text-primary-foreground'
+            : 'bg-muted text-muted-foreground'
+        "
+        @click="getReadStatusFilter(index)"
       >
-        {{ state }}
+        {{ readStatus }}
       </button>
     </div>
   </section>
@@ -43,11 +56,35 @@
 
 <script setup lang="ts">
 import SearchIcon from '@/components/icons/SearchIcon.vue'
+import { useStorageStore } from '@/stores/useStorageStore'
 import { useToolbarToggle } from '@/stores/useToolbarToggle.ts'
+import { ref } from 'vue'
 
 const toolbarToggle = useToolbarToggle()
+const store = useStorageStore()
 
-const tags: string[] = ['All', 'Technology', 'Design', 'Science', 'Culture', 'Health', 'Business']
+const readButtonIndex = ref(0)
+const categoryButtonIndex = ref(0)
 
-const states: string[] = ['All', 'Unread', 'Read']
+const categories: string[] = [
+  'All',
+  'Technology',
+  'Design',
+  'Science',
+  'Culture',
+  'Health',
+  'Business',
+]
+
+const readStatusButton: string[] = ['All', 'Unread', 'Read']
+
+function getReadStatusFilter(index: number) {
+  readButtonIndex.value = index
+  store.readStatusFilter = readStatusButton[readButtonIndex.value]!.toLowerCase()
+}
+
+function getCategoryFilter(index: number) {
+  categoryButtonIndex.value = index
+  store.categoryFilter = categories[categoryButtonIndex.value]!.toLowerCase()
+}
 </script>
