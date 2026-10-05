@@ -72,7 +72,7 @@
 
       <a
         :href="article.url"
-        class="flex items-center w-full justify-center gap-2 py-3 rounded-xl text-sm font-semibold bg-primary text-primary-foreground"
+        class="flex items-center w-full justify-center gap-2 py-3 rounded-xl text-sm font-semibold bg-primary text-primary-foreground hover:opacity-85 transition-opacity"
         target="_blank"
         rel="noopener noreferrer"
       >
