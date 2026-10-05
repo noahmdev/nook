@@ -1,6 +1,7 @@
 <template>
   <button
-    class="cursor-pointer inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium bg-muted text-muted-foreground"
+    class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium bg-muted text-muted-foreground"
+    :class="props.form ? 'cursor-pointer' : ''"
   >
     #{{ props.tag }}
 

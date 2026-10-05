@@ -14,7 +14,7 @@
     </div>
 
     <div class="flex items-center gap-2 mb-4">
-      <span class="rounded-full font-medium px-3 py-1 text-sm bg-muted">
+      <span class="rounded-full font-medium px-3 py-1 text-sm bg-muted capitalize">
         {{ article?.category }}
       </span>
 
