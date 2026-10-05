@@ -20,7 +20,7 @@
     <template #card__content>
       <div class="flex items-center justify-between">
         <span
-          class="inline-flex items-center rounded-full font-medium px-2 py-0.5 text-xs bg-tag-design-bg text-tag-design-fg"
+          class="inline-flex items-center rounded-full font-medium px-2 py-0.5 text-xs bg-tag-design-bg text-tag-design-fg capitalize"
           >{{ props.category }}</span
         >
       </div>
@@ -44,7 +44,7 @@
         >
       </div>
 
-      <div class="flex items-center justify-between pt-1">
+      <div class="flex items-center justify-between pt-1 mt-auto">
         <time class="text-xs text-muted-foreground"> {{ props.date }} </time>
 
         <div class="flex items-center gap-1.5">
