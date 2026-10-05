@@ -90,7 +90,7 @@
     </div>
 
     <button
-      class="mt-4 flex items-center justify-center gap-2 mx-auto text-xs font-medium text-[#ef4444] opacity-40 cursor-pointer"
+      class="mt-4 flex items-center justify-center gap-2 mx-auto text-xs font-medium text-[#ef4444] opacity-40 cursor-pointer hover:opacity-100 transition-opacity"
       @click="handleDeleteArticle"
     >
       Remove from shelf
