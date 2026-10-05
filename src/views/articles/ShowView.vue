@@ -14,7 +14,13 @@
     </div>
 
     <div class="flex items-center gap-2 mb-4">
-      <span class="rounded-full font-medium px-3 py-1 text-sm bg-muted capitalize">
+      <span
+        class="rounded-full font-medium px-3 py-1 text-sm capitalize"
+        :class="[
+          categoryColors[article.category].background,
+          categoryColors[article.category].textColor,
+        ]"
+      >
         {{ article?.category }}
       </span>
 
@@ -107,6 +113,7 @@ import { useToolbarToggle } from '@/stores/useToolbarToggle'
 import { useRoute, useRouter } from 'vue-router'
 import PreviousPageIcon from '@/components/icons/PreviousPageIcon.vue'
 import Tag from '@/components/Tag.vue'
+import { categoryColors } from '@/constants/categoryColors'
 
 const store = useStorageStore()
 const route = useRoute()
