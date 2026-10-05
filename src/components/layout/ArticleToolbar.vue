@@ -6,7 +6,7 @@
         <input
           type="search"
           placeholder="Search articles,tags..."
-          class="w-full pl-9 pr-4 py-2.5 rounded-full text-sm outline-none bg-secondary text-foreground border-[1.5px] border-transparent"
+          class="w-full pl-9 pr-4 py-2.5 rounded-full text-sm outline-none bg-secondary text-foreground border-[1.5px] border-transparent focus:border-primary focus:bg-background transition-all"
           v-model="store.searchQuery"
         />
       </div>

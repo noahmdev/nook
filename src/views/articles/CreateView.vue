@@ -25,7 +25,7 @@
           </span>
           <input
             type="url"
-            class="w-full px-4 py-3 outline-none bg-card border-[1.5px] border-border text-foreground rounded-xl text-sm"
+            class="w-full px-4 py-3 outline-none bg-card border-[1.5px] border-border text-foreground rounded-xl text-sm focus:border-primary transition-all"
             placeholder="https://example.com/my-article"
             required
             v-model="url"
