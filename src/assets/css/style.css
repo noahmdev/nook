@@ -121,8 +121,23 @@
   --font-display: 'Fraunces Variable', Georgia, serif;
   --font-body: 'Instrument Sans Variable', system-ui, sans-serif;
 
+  --color-tag-tech-bg: var(--tag-tech-bg);
+  --color-tag-tech-fg: var(--tag-tech-fg);
+
   --color-tag-design-bg: var(--tag-design-bg);
   --color-tag-design-fg: var(--tag-design-fg);
+
+  --color-tag-science-bg: var(--tag-science-bg);
+  --color-tag-science-fg: var(--tag-science-fg);
+
+  --color-tag-culture-bg: var(--tag-culture-bg);
+  --color-tag-culture-fg: var(--tag-culture-fg);
+
+  --color-tag-health-bg: var(--tag-health-bg);
+  --color-tag-health-fg: var(--tag-health-fg);
+
+  --color-tag-business-bg: var(--tag-business-bg);
+  --color-tag-business-fg: var(--tag-business-fg);
 }
 
 .hide-scrollbar::-webkit-scrollbar {

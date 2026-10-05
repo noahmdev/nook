@@ -1,5 +1,10 @@
 <template>
-  <Card :article="props.id" :clickable="true" :id="props.id">
+  <Card
+    class="hover:-translate-y-0.5 transition-all duration-200"
+    :article="props.id"
+    :clickable="true"
+    :id="props.id"
+  >
     <template #card__media>
       <img :src="props?.image" alt="Image of the article" class="size-full object-cover" />
 
@@ -20,7 +25,11 @@
     <template #card__content>
       <div class="flex items-center justify-between">
         <span
-          class="inline-flex items-center rounded-full font-medium px-2 py-0.5 text-xs bg-tag-design-bg text-tag-design-fg capitalize"
+          class="inline-flex items-center rounded-full font-medium px-2 py-0.5 text-xs capitalize"
+          :class="[
+            categoryColors[props.category].background,
+            categoryColors[props.category].textColor,
+          ]"
           >{{ props.category }}</span
         >
       </div>
@@ -69,6 +78,7 @@
 <script setup lang="ts">
 import Card from '@/components/Card/Card.vue'
 import DeleteIcon from '@/components/icons/DeleteIcon.vue'
+import { categoryColors, type ArticleCategory } from '@/constants/categoryColors'
 
 const emit = defineEmits<{
   toggleRead: [id: string]
@@ -79,7 +89,7 @@ const props = withDefaults(
   defineProps<{
     id: string
     image?: string
-    category: string
+    category: ArticleCategory
     title: string
     description: string
     tags?: string[]

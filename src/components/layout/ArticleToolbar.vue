@@ -12,7 +12,7 @@
       </div>
       <RouterLink
         :to="{ name: 'modal.create' }"
-        class="shrink-0 flex items-center mx-auto gap-1.5 rounded-full bg-primary text-primary-foreground px-4 py-2.5 text-sm font-semibold cursor-pointer"
+        class="shrink-0 flex items-center mx-auto gap-1.5 hover:opacity-85 transition-opacity rounded-full bg-primary text-primary-foreground px-4 py-2.5 text-sm font-semibold cursor-pointer"
         @click="toolbarToggle.showToolbar = false"
       >
         <span class="text-base leading-none">+</span>

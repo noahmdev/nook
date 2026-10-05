@@ -1,3 +1,5 @@
+import type { ArticleCategory } from '@/constants/categoryColors'
+
 export interface Article {
   id: string
   url: string
@@ -5,7 +7,7 @@ export interface Article {
   description: string
   image?: string
   tags?: string[]
-  category: string
+  category: ArticleCategory
   isRead: boolean
   dateAdded: string
 }

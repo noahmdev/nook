@@ -50,7 +50,7 @@
                 type="button"
                 v-for="(button, index) in categoryButtonArray"
                 :key="button"
-                class="cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium"
+                class="cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium capitalize"
                 :class="
                   index === categoryButtonData.index
                     ? 'bg-foreground text-background'
@@ -115,6 +115,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import type { ArticleCategory } from '@/constants/categoryColors'
 import PreviousPageIcon from '@/components/icons/PreviousPageIcon.vue'
 import FormCard from '@/components/Card/FormCard.vue'
 import { getOgMetadata } from '@/services/ogService.ts'
@@ -126,7 +127,7 @@ import { useToolbarToggle } from '@/stores/useToolbarToggle.ts'
 const url = ref<string>('')
 const fetchArticle = ref<ogMetaData>()
 let time: ReturnType<typeof setTimeout> | undefined
-const categoryButtonData = ref({
+const categoryButtonData = ref<{ index: number; category: ArticleCategory }>({
   index: 0,
   category: 'technology',
 })
@@ -175,7 +176,14 @@ watch(url, async () => {
   }, 500)
 })
 
-const categoryButtonArray = ['Technology', 'Design', 'Science', 'Culture', 'Health', 'Business']
+const categoryButtonArray: ArticleCategory[] = [
+  'technology',
+  'design',
+  'science',
+  'culture',
+  'health',
+  'business',
+]
 
 const isUrlValid = computed(() => {
   try {
@@ -188,7 +196,6 @@ const isUrlValid = computed(() => {
 
 function getCategoryData(index: number) {
   categoryButtonData.value.index = index
-  categoryButtonData.value.category =
-    categoryButtonArray[categoryButtonData.value.index]!.toLowerCase()
+  categoryButtonData.value.category = categoryButtonArray[categoryButtonData.value.index]!
 }
 </script>

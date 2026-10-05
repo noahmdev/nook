@@ -2,7 +2,7 @@
   <header class="sticky top-0 z-30 flex items-center justify-between px-4 py-3 bg-background">
     <RouterLink
       :to="{ name: 'articles.index' }"
-      class="flex items-center gap-2"
+      class="flex items-center gap-2 transition-opacity hover:opacity-80"
       @click="toolbarToggle.showToolbar = true"
     >
       <div class="bg-primary size-7 rounded-lg flex items-center justify-center">
