@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-5xl mx-auto">
     <div class="flex items-baseline justify-between mb-5">
-      <p class="text-xs text-muted-foreground">{{ store.articles.length }} articles</p>
+      <p class="text-xs text-muted-foreground">{{ filteredArticles.length }} articles</p>
       <p class="text-xs text-muted-foreground">Page n of n</p>
     </div>
 
