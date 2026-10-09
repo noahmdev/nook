@@ -12,19 +12,20 @@ The project was built to practice Vue.js, state management, and API integration 
 
 ## Features
 
-* Save articles using their URLs
-* Retrieve article metadata from their URLs
-* Display saved articles as cards
-* Sort saved articles
-* Manage a personal reading list
-* Read saved articles later
+- Save articles using their URLs
+- Retrieve article metadata from their URLs
+- Display saved articles as cards
+- Sort saved articles
+- Manage a personal reading list
+- Read saved articles later
 
 ## Tech Stack
 
-* Vue.js
-* TypeScript
-* Vue Router
-* Vite
+- Vue.js
+- TypeScript
+- Vue Router
+- Pinia
+- Vite
 
 ## API
 
@@ -51,24 +52,6 @@ npm install
 
 ```bash
 npm run dev
-```
-
-The application will then be available locally.
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-## Linting
-
-Run ESLint:
-
-```bash
-npm run lint
 ```
 
 ## Screenshots
