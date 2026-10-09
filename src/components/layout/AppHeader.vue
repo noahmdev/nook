@@ -8,7 +8,7 @@
       <div class="bg-primary size-7 rounded-lg flex items-center justify-center">
         <LogoApp />
       </div>
-      <span class="font-display font-semibold tracking-tight">Nook</span>
+      <span class="font-display font-semibold tracking-tight text-foreground">Nook</span>
     </RouterLink>
 
     <span
@@ -21,10 +21,12 @@
         {{ unread.length }} unread
       </p>
       <button
-        title="Switch to dark mode"
+        title="Switch to darkmode"
         class="cursor-pointer size-9 flex items-center justify-center bg-muted rounded-full text-muted-foreground"
+        @click="handleTheme()"
       >
-        <DarkModeIcon />
+        <DarkModeIcon v-if="!darkmode.toggleMode" />
+        <LightModeIcon v-else />
       </button>
     </div>
   </header>
@@ -36,9 +38,31 @@ import DarkModeIcon from '@/components/icons/DarkModeIcon.vue'
 import { useStorageStore } from '@/stores/useStorageStore.ts'
 import { useToolbarToggle } from '@/stores/useToolbarToggle.ts'
 import { computed } from 'vue'
+import { useDarkmodeToggle } from '@/stores/useDarkmodeToggle'
+import LightModeIcon from '../icons/LightModeIcon.vue'
 
 const store = useStorageStore()
 const toolbarToggle = useToolbarToggle()
+const darkmode = useDarkmodeToggle()
+
+initTheme()
+
+function initTheme() {
+  if (darkmode.toggleMode) {
+    document.documentElement.classList.add('dark')
+  }
+}
+
+function handleTheme() {
+  darkmode.saveTheme()
+  if (darkmode.toggleMode) {
+    document.documentElement.classList.add('dark')
+  }
+
+  if (!darkmode.toggleMode) {
+    document.documentElement.classList.remove('dark')
+  }
+}
 
 const unread = computed(() => {
   return store.articles.filter((a) => !a.isRead)

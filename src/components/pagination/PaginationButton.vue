@@ -1,5 +1,5 @@
 <template>
-  <Button class="bg-muted">
+  <Button class="bg-muted text-foreground">
     <svg
       v-if="props.direction === 'previous'"
       width="14"

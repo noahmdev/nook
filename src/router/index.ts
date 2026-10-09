@@ -6,6 +6,7 @@ import ShowView from '@/views/articles/ShowView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    { path: '/:pathMatch(.*)*', redirect: '/articles' },
     { path: '/', redirect: { name: 'articles.index' } },
     { path: '/articles', name: 'articles.index', component: IndexView },
     { path: '/article/new', name: 'modal.create', component: CreateView },

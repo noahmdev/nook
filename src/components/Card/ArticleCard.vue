@@ -57,7 +57,7 @@
         <time class="text-xs text-muted-foreground"> {{ props.date }} </time>
 
         <div class="flex items-center gap-1.5">
-          <span class="text-xs text-muted-foreground">Unread</span>
+          <span class="text-xs text-muted-foreground">{{ props.isRead ? 'Read' : 'Unread' }}</span>
           <button
             class="inline-flex h-6 w-11 relative items-center rounded-full bg-muted z-3 cursor-pointer transition-all duration-100"
             title="Mark as read"

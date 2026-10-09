@@ -82,6 +82,7 @@
               <label class="w-full">
                 <input
                   type="text"
+                  maxlength="14"
                   class="flex-1 w-full px-4 py-2.5 rounded-xl text-sm outline-none bg-card border-[1.5px] border-border text-foreground"
                   placeholder="Add a tag and press Enter"
                   v-model="inputTag"

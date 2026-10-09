@@ -10,7 +10,11 @@
       </p>
     </div>
 
-    <div id="display-cards" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div
+      id="display-cards"
+      v-if="store.articles.length !== 0"
+      class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+    >
       <ArticleCard
         v-for="article in filteredArticles"
         :key="article.id"
@@ -25,6 +29,10 @@
         @toggle-read="toggleArticleRead"
         @delete-card="deleteArticleCard"
       />
+    </div>
+
+    <div v-else class="flex items-center justify-center h-auto">
+      <p class="text-foreground mx-auto">No article registered</p>
     </div>
 
     <footer
@@ -42,7 +50,9 @@
         :key="page"
         :page="index + 1"
         @click="currentPage = index + 1"
-        :class="index === currentPage - 1 ? 'text-background bg-foreground' : 'bg-muted'"
+        :class="
+          index === currentPage - 1 ? 'text-background bg-foreground' : 'bg-muted text-foreground'
+        "
       />
       <PaginationButton
         direction="next"

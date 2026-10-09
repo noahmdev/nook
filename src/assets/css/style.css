@@ -1,9 +1,8 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/instrument-sans';
-@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource-variable/source-serif-4';
 
 :root {
-  /* Backgrounds & surfaces */
   --background: #faf8f5;
   --foreground: #1a1714;
   --card: #ffffff;
@@ -14,30 +13,25 @@
   --primary-foreground: #ffffff;
   --primary-hover: #d44e2e;
 
-  /* Secondary & muted surfaces */
   --secondary: #f2ede8;
   --secondary-foreground: #4a4540;
   --muted: #ede8e3;
   --muted-foreground: #7a7068;
 
-  /* Accent (same as primary for this design) */
   --accent: #e85c3a;
   --accent-foreground: #ffffff;
 
-  /* Structure */
   --border: #e5ded8;
   --ring: #e85c3a;
   --shadow-sm: 0 1px 3px rgba(26, 23, 20, 0.06), 0 1px 2px rgba(26, 23, 20, 0.04);
   --shadow-md: 0 4px 16px rgba(26, 23, 20, 0.08), 0 2px 6px rgba(26, 23, 20, 0.05);
   --shadow-lg: 0 8px 32px rgba(26, 23, 20, 0.1), 0 3px 10px rgba(26, 23, 20, 0.06);
 
-  /* Radius */
   --radius-sm: 8px;
   --radius: 14px;
   --radius-lg: 20px;
   --radius-full: 9999px;
 
-  /* Tag palette */
   --tag-tech-bg: #eef2ff;
   --tag-tech-fg: #4338ca;
   --tag-design-bg: #fdf2f8;
@@ -55,35 +49,29 @@
 }
 
 .dark {
-  /* Backgrounds & surfaces */
   --background: #111009;
   --foreground: #f0ebe5;
   --card: #1c1914;
   --card-foreground: #f0ebe5;
 
-  /* Brand */
   --primary: #e85c3a;
   --primary-foreground: #ffffff;
   --primary-hover: #f06a46;
 
-  /* Secondary & muted surfaces */
   --secondary: #26221c;
   --secondary-foreground: #c4b8af;
   --muted: #201d18;
   --muted-foreground: #8a7e76;
 
-  /* Accent */
   --accent: #e85c3a;
   --accent-foreground: #ffffff;
 
-  /* Structure */
   --border: #2c2720;
   --ring: #e85c3a;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.2);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4), 0 3px 10px rgba(0, 0, 0, 0.25);
 
-  /* Tag palette — darkened */
   --tag-tech-bg: #1e2035;
   --tag-tech-fg: #a5b4fc;
   --tag-design-bg: #2a1624;
@@ -118,8 +106,8 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
-  --font-display: 'Fraunces Variable', Georgia, serif;
-  --font-body: 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans Variable', sans-serif;
+  --font-body: 'Source Serif 4 Variable', serif;
 
   --color-tag-tech-bg: var(--tag-tech-bg);
   --color-tag-tech-fg: var(--tag-tech-fg);
@@ -155,4 +143,5 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--foreground);
 }

@@ -16,5 +16,107 @@
     "title": "Un titre vraiment très long qui va tester si ton UI gère correctement le débordement de texte dans une carte d'article sans casser la mise en page",
     "description": "Description normale ici.",
     "image": ""
+  },
+  "https://example.com/article-4": {
+    "url": "https://example.com/article-4",
+    "title": "Comprendre les computed et les watch dans Vue 3",
+    "description": "Quand utiliser une propriété calculée, un observateur simple ou watchEffect pour gérer la réactivité.",
+    "image": "https://picsum.photos/seed/article4/800/450"
+  },
+  "https://example.com/article-5": {
+    "url": "https://example.com/article-5",
+    "title": "Les fondamentaux de Flexbox",
+    "description": "Maîtrisez les propriétés essentielles de Flexbox pour construire des mises en page flexibles et responsives.",
+    "image": "https://picsum.photos/seed/article5/800/450"
+  },
+  "https://example.com/article-6": {
+    "url": "https://example.com/article-6",
+    "title": "Créer une API REST avec Laravel",
+    "description": "Routes, contrôleurs, validation et réponses JSON : les bases pour concevoir une API propre avec Laravel.",
+    "image": "https://picsum.photos/seed/article6/800/450"
+  },
+  "https://example.com/article-7": {
+    "url": "https://example.com/article-7",
+    "title": "Pourquoi le design minimaliste ne signifie pas supprimer tous les détails",
+    "description": "Réflexions sur la hiérarchie visuelle, les espaces blancs et les détails qui rendent une interface agréable à utiliser.",
+    "image": "https://picsum.photos/seed/article7/800/450"
+  },
+  "https://example.com/article-8": {
+    "url": "https://example.com/article-8",
+    "title": "HTTP : comprendre les méthodes GET, POST, PUT et PATCH",
+    "description": "Une explication concrète des méthodes HTTP, de leurs différences et de leur utilisation dans une API.",
+    "image": ""
+  },
+  "https://example.com/article-9": {
+    "url": "https://example.com/article-9",
+    "title": "Les erreurs classiques quand on débute avec Git",
+    "description": "",
+    "image": "https://picsum.photos/seed/article9/800/450"
+  },
+  "https://example.com/article-10": {
+    "url": "https://example.com/article-10",
+    "title": "Comprendre les closures en JavaScript",
+    "description": "Découvrez comment les closures fonctionnent, pourquoi elles sont utiles et comment les reconnaître dans du code réel.",
+    "image": "https://picsum.photos/seed/article10/800/450"
+  },
+  "https://example.com/article-11": {
+    "url": "https://example.com/article-11",
+    "title": "Une introduction accessible à l'accessibilité web",
+    "description": "Les principes essentiels pour rendre un site utilisable par le plus grand nombre, au clavier comme avec un lecteur d'écran.",
+    "image": "https://picsum.photos/seed/article11/800/450"
+  },
+  "https://example.com/article-12": {
+    "url": "https://example.com/article-12",
+    "title": "Pourquoi choisir une architecture modulaire pour son application Vue",
+    "description": "Organiser composants, composables, stores et services pour conserver un projet lisible à mesure qu'il grandit.",
+    "image": "https://picsum.photos/seed/article12/800/450"
+  },
+  "https://example.com/article-13": {
+    "url": "https://example.com/article-13",
+    "title": "Le guide pratique des variables CSS",
+    "description": "Utilisez les propriétés personnalisées CSS pour centraliser vos couleurs, espacements et autres valeurs de design.",
+    "image": "https://picsum.photos/seed/article13/800/450"
+  },
+  "https://example.com/article-14": {
+    "url": "https://example.com/article-14",
+    "title": "Pinia : partager un état entre plusieurs composants",
+    "description": "",
+    "image": "https://picsum.photos/seed/article14/800/450"
+  },
+  "https://example.com/article-15": {
+    "url": "https://example.com/article-15",
+    "title": "Les bases de la sécurité d'une API web",
+    "description": "Authentification, autorisation, validation des entrées et gestion des erreurs : les points à ne pas négliger.",
+    "image": "https://picsum.photos/seed/article15/800/450"
+  },
+  "https://example.com/article-16": {
+    "url": "https://example.com/article-16",
+    "title": "Pourquoi les performances web ne se résument pas au temps de chargement",
+    "description": "Découvrez comment mesurer la réactivité, les décalages de mise en page et l'expérience réelle des utilisateurs.",
+    "image": ""
+  },
+  "https://example.com/article-17": {
+    "url": "https://example.com/article-17",
+    "title": "Écrire des commits Git clairs et utiles",
+    "description": "Une méthode simple pour rédiger des messages de commit cohérents et faciliter la lecture de l'historique du projet.",
+    "image": "https://picsum.photos/seed/article17/800/450"
+  },
+  "https://example.com/article-18": {
+    "url": "https://example.com/article-18",
+    "title": "Comprendre le fonctionnement du cache HTTP",
+    "description": "Cache-Control, ETag et réponses conditionnelles : comment limiter les requêtes inutiles sans servir des données obsolètes.",
+    "image": "https://picsum.photos/seed/article18/800/450"
+  },
+  "https://example.com/article-19": {
+    "url": "https://example.com/article-19",
+    "title": "Comment concevoir une bonne expérience de recherche dans une bibliothèque d'articles",
+    "description": "Recherche instantanée, filtres, tri et états vides : les détails qui facilitent la navigation dans une collection grandissante.",
+    "image": "https://picsum.photos/seed/article19/800/450"
+  },
+  "https://example.com/article-20": {
+    "url": "https://example.com/article-20",
+    "title": "Apprendre à lire du code inconnu sans se perdre",
+    "description": "Une approche progressive pour explorer un projet, comprendre ses dépendances et identifier les points d'entrée importants.",
+    "image": "https://picsum.photos/seed/article20/800/450"
   }
 }

@@ -14,3 +14,18 @@ export function initLocalStorage(): Article[] {
 export function saveLocalStorage(articlesArray: Article[]): void {
   localStorage.setItem('articles', JSON.stringify(articlesArray))
 }
+
+export function initDarkmodeToggle() {
+  const modeToggle = localStorage.getItem('darkmode')
+
+  if (!modeToggle) {
+    localStorage.setItem('darkmode', 'false')
+    return false
+  }
+
+  return modeToggle === 'true'
+}
+
+export function saveThemeLocalStorage(theme: boolean) {
+  localStorage.setItem('darkmode', JSON.stringify(theme))
+}
