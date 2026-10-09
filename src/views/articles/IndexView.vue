@@ -1,8 +1,13 @@
 <template>
   <div class="max-w-5xl mx-auto">
     <div class="flex items-baseline justify-between mb-5">
-      <p class="text-xs text-muted-foreground">{{ filteredArticles.length }} articles</p>
-      <p class="text-xs text-muted-foreground">Page n of n</p>
+      <p class="text-xs text-muted-foreground">
+        {{ matchingArticles.length }}
+        articles
+      </p>
+      <p class="text-xs text-muted-foreground">
+        Page {{ numberOfPage === 0 ? '0' : currentPage }} of {{ numberOfPage }}
+      </p>
     </div>
 
     <div id="display-cards" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -21,43 +26,91 @@
         @delete-card="deleteArticleCard"
       />
     </div>
+
+    <footer
+      v-if="filteredArticles.length !== 0"
+      class="flex items-center justify-center gap-1.5 py-10"
+    >
+      <PaginationButton
+        direction="previous"
+        @click="currentPage = Math.max(1, currentPage - 1)"
+        :disabled="currentPage === 1"
+        class="disabled:opacity-30"
+      />
+      <PaginationPageButton
+        v-for="(page, index) in numberOfPage"
+        :key="page"
+        :page="index + 1"
+        @click="currentPage = index + 1"
+        :class="index === currentPage - 1 ? 'text-background bg-foreground' : 'bg-muted'"
+      />
+      <PaginationButton
+        direction="next"
+        @click="currentPage = Math.min(numberOfPage, currentPage + 1)"
+        :disabled="currentPage === numberOfPage"
+        class="disabled:opacity-30"
+      />
+    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
 import ArticleCard from '@/components/Card/ArticleCard.vue'
+import PaginationButton from '@/components/pagination/PaginationButton.vue'
+import PaginationPageButton from '@/components/pagination/PaginationPageButton.vue'
 import { useStorageStore } from '@/stores/useStorageStore.ts'
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const store = useStorageStore()
+const currentPage = ref(1)
 
-const filteredArticles = computed(() => {
-  let filteredArray = store.articles
+const numberOfPage = computed(() => {
+  return Math.ceil(matchingArticles.value.length / 9)
+})
 
-  filteredArray = filteredArray.filter((a) => {
+const matchingArticles = computed(() => {
+  const searchQuery = store.searchQuery.trim().toLowerCase()
+
+  return store.articles.filter((article) => {
     let readStatus = null
 
     if (store.readStatusFilter === 'read') readStatus = true
     if (store.readStatusFilter === 'unread') readStatus = false
 
+    const matchesFilters =
+      (store.categoryFilter === 'all' || article.category === store.categoryFilter) &&
+      (store.readStatusFilter === 'all' || article.isRead === readStatus)
+
+    if (!matchesFilters || !searchQuery) return matchesFilters
+
     return (
-      (store.categoryFilter === 'all' || a.category === store.categoryFilter) &&
-      (store.readStatusFilter === 'all' || a.isRead === readStatus)
+      article.title.toLowerCase().includes(searchQuery) ||
+      article.description.toLowerCase().includes(searchQuery) ||
+      article.tags?.some((tag) => tag.toLowerCase().includes(searchQuery)) ||
+      article.category.toLowerCase().includes(searchQuery)
     )
   })
-
-  if (!store.searchQuery) return filteredArray
-
-  return filteredArray.filter(
-    (article) =>
-      article.title.toLowerCase().includes(store.searchQuery.trim().toLowerCase()) ||
-      article.description.toLowerCase().includes(store.searchQuery.trim().toLocaleLowerCase()) ||
-      article.tags?.some((tag) =>
-        tag.toLowerCase().includes(store.searchQuery.trim().toLowerCase()),
-      ) ||
-      article.category.toLowerCase().includes(store.searchQuery.trim().toLowerCase()),
-  )
 })
+
+const filteredArticles = computed(() => {
+  const start = (currentPage.value - 1) * 9
+  return matchingArticles.value.slice(start, start + 9)
+})
+
+watch(
+  currentPage,
+  () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  },
+  { flush: 'post' },
+)
+
+watch(
+  () => [store.categoryFilter, store.readStatusFilter, store.searchQuery],
+  () => {
+    currentPage.value = 1
+  },
+)
 
 function toggleArticleRead(id: string) {
   store.toggleRead(id)
