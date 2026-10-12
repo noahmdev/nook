@@ -56,9 +56,33 @@ npm run dev
 
 ## Screenshots
 
+### Home page
+
+![Home page](./screenshots/home.png)
+
+### Article details
+
+![Article details](./screenshots/article-show.png)
+
+### Create an article
+
+![Create an article](./screenshots/article-create.png)
+
 ## What I Learned
 
 This project helped me improve my understanding of:
+
+- **Typing real data with TypeScript.** Defining `Article` and `OgMetadata` interfaces up front gave me a single contract shared by the store, the services and the components, and caught shape mismatches at compile time.
+- **Centralized state with Pinia.** Articles, read/unread status and persistence (localStorage) live in one store, so every view stays in sync without prop drilling.
+- **Isolating an external dependency.** The Open Graph API sits behind a dedicated service, with a mock layer selected per environment. I could build and test the whole UI without depending on the network or exposing an API key in a static build, and the demo never breaks because of a third-party quota.
+- **Client-side search and filtering.** A single search covers title, description, category and tags, combined with category and tag filters and read/unread status, all derived reactively with `computed`.
+- **Pagination built from scratch.** I worked out the slicing logic myself instead of installing a library, which meant making it play well with filters and search.
+- **Mobile-first, responsive design.** I started from the small screen and layered up with Tailwind breakpoints, using a fluid grid rather than a pile of manual breakpoints.
+- **Navigation with Vue Router.** Separate views for the library, the add form and the article detail, with routes based on a stable article `id`.
+
+## Known issues
+
+- Filter/toolbar state is not restored when navigating back from the detail view.
 
 ## License
 
